@@ -6,141 +6,34 @@
 <title>لوحة معلومات الجهاز — #SOR</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-
-body {
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background: linear-gradient(-45deg,#0f1724,#07193a,#0f1724,#07193a);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color:#e6eef6;
-}
-
-@keyframes gradientBG {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-header{
-  text-align:center;
-  padding:50px 20px;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(10px);
-  border-bottom: 4px solid #06b6d4;
-  box-shadow:0 10px 25px rgba(0,0,0,0.5);
-}
-header h1{
-  margin:0;
-  font-size:3em;
-  background: linear-gradient(90deg,#06b6d4,#3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textGlow 2s ease-in-out infinite alternate;
-}
-header p{
-  margin:10px 0 0;
-  font-size:1.3em;
-  opacity:0.8;
-}
-
-@keyframes textGlow{
-  0%{text-shadow: 0 0 10px #06b6d4;}
-  100%{text-shadow: 0 0 30px #3b82f6;}
-}
-
-main{
-  max-width:1000px;
-  margin:40px auto;
-  padding:20px;
-}
-
-.card{
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-radius:20px;
-  padding:25px;
-  margin-bottom:25px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.6);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.card:hover{
-  transform: translateY(-5px);
-  box-shadow:0 25px 60px rgba(0,0,0,0.7);
-}
-
-.card h2{
-  margin-top:0;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  padding-bottom:10px;
-  background: linear-gradient(90deg,#06b6d4,#3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.field{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 0;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-  font-size:1em;
-}
+body { margin:0; font-family:'Inter',sans-serif; background: linear-gradient(-45deg,#0f1724,#07193a,#0f1724,#07193a); background-size:400% 400%; animation: gradientBG 15s ease infinite; color:#e6eef6; }
+@keyframes gradientBG { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+header{ text-align:center; padding:50px 20px; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border-bottom: 4px solid #06b6d4; box-shadow:0 10px 25px rgba(0,0,0,0.5);}
+header h1{ margin:0; font-size:3em; background: linear-gradient(90deg,#06b6d4,#3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: textGlow 2s ease-in-out infinite alternate;}
+header p{ margin:10px 0 0; font-size:1.3em; opacity:0.8;}
+@keyframes textGlow{0%{text-shadow: 0 0 10px #06b6d4;}100%{text-shadow:0 0 30px #3b82f6;}}
+main{ max-width:1000px; margin:40px auto; padding:20px;}
+.card{ background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border-radius:20px; padding:25px; margin-bottom:25px; box-shadow:0 15px 40px rgba(0,0,0,0.6); transition: transform 0.3s, box-shadow 0.3s;}
+.card:hover{ transform: translateY(-5px); box-shadow:0 25px 60px rgba(0,0,0,0.7);}
+.card h2{ margin-top:0; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px; background: linear-gradient(90deg,#06b6d4,#3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+.field{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:1em;}
 .field:last-child{border:none;}
-.field span:first-child{
-  font-weight:600;
-  color:#06b6d4;
-}
-
-.refresh-btn{
-  margin-top:15px;
-  padding:12px 22px;
-  font-size:1em;
-  border:none;
-  border-radius:12px;
-  background:#3b82f6;
-  color:#fff;
-  cursor:pointer;
-  transition:0.3s;
-}
-.refresh-btn:hover{
-  background:#06b6d4;
-}
-
-footer{
-  text-align:center;
-  margin:50px 0;
-  font-weight:bold;
-  color:#06b6d4;
-  text-shadow:0 0 10px #06b6d4;
-  font-size:1.1em;
-}
+.field span:first-child{ font-weight:600; color:#06b6d4;}
+.refresh-btn{ margin-top:15px; padding:12px 22px; font-size:1em; border:none; border-radius:12px; background:#3b82f6; color:#fff; cursor:pointer; transition:0.3s;}
+.refresh-btn:hover{ background:#06b6d4;}
+footer{ text-align:center; margin:50px 0; font-weight:bold; color:#06b6d4; text-shadow:0 0 10px #06b6d4; font-size:1.1em;}
 </style>
 </head>
 <body>
-
 <header>
-  <h1>لوحة معلومات الجهاز</h1>
-  <p>أسطورية، تفاعلية — حقوق المبرمج #SOR</p>
+<h1>لوحة معلومات الجهاز</h1>
+<p>أسطورية، تفاعلية — حقوق المبرمج #SOR</p>
 </header>
-
 <main>
-  <div class="card">
-    <h2>معلومات المتصفح والنظام</h2>
-    <div id="clientInfo"></div>
-  </div>
-
-  <div class="card">
-    <h2>معلومات الشبكة والدولة</h2>
-    <div id="networkInfo"></div>
-    <button class="refresh-btn" onclick="fetchNetworkInfo()">تحديث الشبكة</button>
-  </div>
-
-  <div class="card">
-    <h2>الوقت المحلي</h2>
-    <div class="field"><span>التاريخ والوقت:</span><span id="localTime"></span></div>
-  </div>
+<div class="card"><h2>معلومات المتصفح والنظام</h2><div id="clientInfo"></div></div>
+<div class="card"><h2>معلومات الشبكة والدولة</h2><div id="networkInfo"></div><button class="refresh-btn" onclick="fetchNetworkInfo()">تحديث الشبكة</button></div>
+<div class="card"><h2>الوقت المحلي</h2><div class="field"><span>التاريخ والوقت:</span><span id="localTime"></span></div></div>
 </main>
-
 <footer>حقوق المبرمج #SOR</footer>
 
 <script>
@@ -162,43 +55,39 @@ function showClientInfo(){
   container.innerHTML = fields.map(f=>`<div class="field"><span>${f[0]}:</span><span>${f[1]}</span></div>`).join('');
 }
 
-// معلومات الشبكة والدولة باستخدام ipapi.co
+// الشبكة والدولة (API)
 async function fetchNetworkInfo(){
   const container = document.getElementById('networkInfo');
   container.innerHTML = '<div class="field"><span>تحميل البيانات...</span></div>';
   try{
-    const res = await fetch('https://ipapi.co/json/');
+    const res = await fetch('/api/info');
     const data = await res.json();
     const fields = [
       ['IP Address', data.ip],
       ['مدينة', data.city],
       ['المنطقة', data.region],
-      ['الدولة', data.country_name],
-      ['مزود الإنترنت (ISP)', data.org],
+      ['الدولة', data.country],
+      ['مزود الإنترنت', data.isp],
       ['الـ Postal Code', data.postal],
-      ['الإحداثيات', data.latitude+', '+data.longitude],
+      ['الإحداثيات', data.lat+','+data.lon],
       ['Time Zone', data.timezone]
     ];
     container.innerHTML = fields.map(f=>`<div class="field"><span>${f[0]}:</span><span>${f[1]}</span></div>`).join('');
-  } catch(e){
+  }catch(e){
     container.innerHTML = '<div class="field"><span>حدث خطأ في جلب المعلومات</span></div>';
   }
 }
 
 // الوقت المحلي
 function updateLocalTime(){
-  const now = new Date();
-  document.getElementById('localTime').textContent = now.toLocaleString('ar-EG', { hour12:true });
+  document.getElementById('localTime').textContent = new Date().toLocaleString('ar-EG',{hour12:true});
 }
-
-// تحديث دوري للوقت
 setInterval(updateLocalTime,1000);
 
-// عند تحميل الصفحة
+// تحميل الصفحة
 showClientInfo();
 fetchNetworkInfo();
 updateLocalTime();
 </script>
-
 </body>
 </html>
