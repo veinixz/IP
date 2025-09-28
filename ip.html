@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>معلومات الجهاز — أسطوري</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#0f172a; /* dark navy */
+    --bg2:#06202a; /* teal-dark */
+    --glass: rgba(255,255,255,0.06);
+    --accent: linear-gradient(90deg,#7c3aed,#06b6d4);
+    --glass-2: rgba(255,255,255,0.03);
+    --card-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    font-family: 'Cairo', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%;margin:0;background:radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.12), transparent 8%), radial-gradient(900px 500px at 90% 90%, rgba(6,182,212,0.08), transparent 6%), linear-gradient(180deg,var(--bg1),var(--bg2)); color:#e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;}
+  .panel{
+    width:100%;
+    max-width:980px;
+    border-radius:18px;
+    padding:28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow:var(--card-shadow);
+    border: 1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(8px) saturate(120%);
+  }
+  .header{
+    display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:20px;
+  }
+  .logo{
+    display:flex;gap:14px;align-items:center;
+  }
+  .badge{
+    width:64px;height:64px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:white;box-shadow:0 8px 24px rgba(124,58,237,0.18);font-size:20px;
+  }
+  h1{margin:0;font-size:20px;font-weight:700}
+  p.lead{margin:0;color:rgba(230,238,246,0.78);font-size:13px}
+  .controls{display:flex;gap:10px;align-items:center}
+  button{
+    background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    color:inherit;border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;
+  }
+  button.strong{background:var(--accent);box-shadow:0 8px 18px rgba(6,182,212,0.08);border:none;color:#021124}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:18px;
+  }
+  @media (max-width:760px){ .grid{grid-template-columns:1fr} .header{flex-direction:column;align-items:flex-start;gap:12px} }
+  .card{
+    padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid var(--glass-2);
+    min-height:110px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .card h3{margin:0;font-size:13px;color:#dbeafe}
+  .value{font-size:18px;font-weight:700;margin-top:8px;word-break:break-all}
+  .muted{font-size:13px;color:rgba(230,238,246,0.7);margin-top:6px}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .tag{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);font-weight:600;font-size:12px}
+  .small{font-size:13px;color:rgba(230,238,246,0.75)}
+  .foot{margin-top:16px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+  .status-dot{width:10px;height:10px;border-radius:999px;display:inline-block;margin-left:8px}
+  .online{background:linear-gradient(90deg,#34d399,#059669);box-shadow:0 6px 18px rgba(16,185,129,0.12)}
+  .offline{background:linear-gradient(90deg,#f87171,#b91c1c);box-shadow:0 6px 18px rgba(185,28,28,0.12)}
+  .actions{display:flex;gap:8px}
+  .copy-btn{background:transparent;border:1px dashed rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;font-weight:700;cursor:pointer}
+  .note{font-size:12px;color:rgba(230,238,246,0.6)}
+  .spinner{width:20px;height:20px;border-radius:50%;border:3px solid rgba(255,255,255,0.08);border-top-color:rgba(255,255,255,0.4);animation:spin 1s linear infinite;display:inline-block;vertical-align:middle}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  footer{margin-top:18px;text-align:center;color:rgba(230,238,246,0.45);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="panel" role="region" aria-label="معلومات الجهاز">
+    <div class="header">
+      <div class="logo">
+        <div class="badge">مُ</div>
+        <div>
+          <h1>معلومات الجهاز — تصميم أسطوري</h1>
+          <p class="lead">يعرض IP, حالة الإنترنت, الدولة, الوقت والمزيد — مباشرة من المتصفح.</p>
+        </div>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <div class="row small">
+          <span id="netStatusDot" class="status-dot"></span>
+          <span id="netStatusText">جارٍ التحقق...</span>
+        </div>
+        <button id="refreshBtn" title="تحديث">🔄 تحديث</button>
+        <button id="copyAll" class="strong" title="نسخ كل المعلومات">نسخ الكل</button>
+      </div>
+    </div>
+
+    <div class="grid" id="infoGrid">
+      <div class="card" id="card-ip">
+        <div>
+          <h3>عنوان الـ IP</h3>
+          <div class="value" id="ipValue">—</div>
+          <div class="muted">العنوان العام الذي يراه الإنترنت.</div>
+        </div>
+        <div class="foot">
+          <div class="small note" id="ipOrg">—</div>
+          <div class="actions">
+            <button class="copy-btn" data-copy="ipValue">نسخ</button>
+            <button class="copy-btn" id="whoisBtn" title="فتح بحث WHOIS (جديد)">WHOIS</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="card-conn">
+        <div>
+          <h3>حالة الاتصال (الإنترنت)</h3>
+          <div class="value row" id="connValue"><span id="connText">—</span></div>
+          <div class="muted">تحقق سريع من اتصال المتصفح ووقت الاستجابة.</div>
+        </div>
+        <div class="foot">
+          <div class="small note" id="latencyText">—</div>
+          <div class="actions">
+            <button class="copy-btn" id="testPing">اختبار اتصال</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="card-loc">
+        <div>
+          <h3>البلد / المنطقة</h3>
+          <div class="value" id="countryValue">—</div>
+          <div class="muted" id="cityRegion">—</div>
+        </div>
+        <div class="foot">
+          <div class="small note" id="coords">—</div>
+          <div class="actions">
+            <button class="copy-btn" data-copy="countryValue">نسخ</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="card-time">
+        <div>
+          <h3>الوقت (التوقيت المحلي)</h3>
+          <div class="value" id="timeValue">—</div>
+          <div class="muted" id="tzValue">—</div>
+        </div>
+        <div class="foot">
+          <div class="small note">يُحدّث كل ثانية</div>
+          <div class="actions">
+            <button class="copy-btn" data-copy="timeValue">نسخ الوقت</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="card-more">
+        <div>
+          <h3>معلومات إضافية</h3>
+          <div class="muted">User Agent, Platform, Browser</div>
+          <div class="value" id="uaValue">—</div>
+        </div>
+        <div class="foot">
+          <div class="small note" id="engine">—</div>
+          <div class="actions">
+            <button class="copy-btn" data-copy="uaValue">نسخ</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="card-raw">
+        <div>
+          <h3>بيانات (JSON) خام</h3>
+          <div class="muted">يمكنك الاطّلاع أو نسخ الـ JSON للمعالجة.</div>
+          <pre id="rawJson" style="white-space:pre-wrap;margin-top:8px;font-size:12px;color:rgba(230,238,246,0.85);max-height:120px;overflow:auto">—</pre>
+        </div>
+        <div class="foot">
+          <div class="small note">مصدر: ipapi.co</div>
+          <div class="actions">
+            <button class="copy-btn" id="copyJson">نسخ JSON</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      صفحة محلية — لا ترسل بيانات إضافية دون إذن. تستخدم خدمة مجانية للحصول على الـ IP/المنطقة.
+    </footer>
+  </div>
+</div>
+
+<script>
+(async function(){
+  const el = id=>document.getElementById(id);
+  const setText=(id,txt)=>{ const e=el(id); if(e) e.textContent=txt };
+  const setHTML=(id,html)=>{ const e=el(id); if(e) e.innerHTML=html };
+
+  // عناصر
+  const netStatusDot = el('netStatusDot');
+  const netStatusText = el('netStatusText');
+  const connText = el('connText');
+  const latencyText = el('latencyText');
+  const ipValue = el('ipValue');
+  const ipOrg = el('ipOrg');
+  const countryValue = el('countryValue');
+  const cityRegion = el('cityRegion');
+  const coords = el('coords');
+  const timeValue = el('timeValue');
+  const tzValue = el('tzValue');
+  const uaValue = el('uaValue');
+  const engine = el('engine');
+  const rawJson = el('rawJson');
+
+  // Helpers
+  function onlineState(){
+    return navigator.onLine;
+  }
+  function setNetStatus(online){
+    if(online){
+      netStatusDot.classList.remove('offline'); netStatusDot.classList.add('online');
+      netStatusText.textContent = 'متصل بالانترنت';
+    } else {
+      netStatusDot.classList.remove('online'); netStatusDot.classList.add('offline');
+      netStatusText.textContent = 'غير متصل (وضع Offline)';
+    }
+  }
+  setNetStatus(onlineState());
+  window.addEventListener('online', ()=>setNetStatus(true));
+  window.addEventListener('offline', ()=>setNetStatus(false));
+
+  // Copy utilities
+  function copyText(text){
+    navigator.clipboard?.writeText(text).then(()=>flash('تم النسخ ✅')).catch(()=>alert('فشل النسخ — افتح الموقع عبر https أو جرب يدوياً.'));
+  }
+  function flash(msg){
+    const b = document.createElement('div'); b.textContent = msg;
+    Object.assign(b.style,{position:'fixed',right:'18px',bottom:'18px',background:'rgba(0,0,0,0.6)',padding:'10px 14px',borderRadius:'10px',color:'white',zIndex:9999});
+    document.body.appendChild(b); setTimeout(()=>b.remove(),1600);
+  }
+
+  document.body.addEventListener('click', (ev)=>{
+    const btn = ev.target.closest('[data-copy]');
+    if(btn){
+      const key = btn.getAttribute('data-copy');
+      const txt = document.getElementById(key)?.textContent || '';
+      copyText(txt);
+    }
+  });
+  document.getElementById('copyJson').addEventListener('click', ()=>copyText(rawJson.textContent));
+  document.getElementById('copyAll').addEventListener('click', ()=>{
+    const all = [
+      `IP: ${ipValue.textContent}`,
+      `Country: ${countryValue.textContent} ${cityRegion.textContent ? '- '+cityRegion.textContent : ''}`,
+      `Time: ${timeValue.textContent} (${tzValue.textContent})`,
+      `UserAgent: ${uaValue.textContent}`
+    ].join('\\n');
+    copyText(all);
+  });
+
+  // WHOIS open (simple)
+  document.getElementById('whoisBtn').addEventListener('click', ()=>{
+    const ip = ipValue.textContent.trim();
+    if(!ip || ip==='—') return flash('لا يوجد IP للبحث');
+    window.open('https://whois.domaintools.com/'+encodeURIComponent(ip),'_blank');
+  });
+
+  // Test ping by fetching small file and measuring time
+  async function quickPing(){
+    try{
+      const t0 = performance.now();
+      // Use a fast endpoint (ipify for small) — but ipify returns json; just HEAD not allowed cross origin; use a simple fetch to a small public endpoint
+      // We'll call https://api.ipify.org?format=json which is tiny.
+      const resp = await fetch('https://api.ipify.org?format=json', {cache:'no-store'});
+      const t1 = performance.now();
+      if(!resp.ok) throw new Error('bad resp');
+      const ms = Math.round(t1-t0);
+      latencyText.textContent = `زمن الاستجابة ~ ${ms} مللي ثانية`;
+      return ms;
+    }catch(e){
+      latencyText.textContent = 'فشل اختبار الاستجابة (مقيد أو غير متصل)';
+      return Infinity;
+    }
+  }
+  document.getElementById('testPing').addEventListener('click', ()=>quickPing());
+
+  // Live clock for timezone
+  let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  function updateClock(remoteTZ){
+    const now = new Date();
+    // If remoteTZ provided, show time in that zone using Intl
+    try{
+      const fmt = new Intl.DateTimeFormat('ar-EG',{
+        hour:'2-digit',minute:'2-digit',second:'2-digit',
+        year:'numeric',month:'short',day:'2-digit',
+        hour12:false, timeZone: remoteTZ || tz
+      });
+      timeValue.textContent = fmt.format(now);
+      tzValue.textContent = (remoteTZ||tz) + (remoteTZ && remoteTZ!==Intl.DateTimeFormat().resolvedOptions().timeZone ? ' (من خدمة الموقع)' : ' (من المتصفح)');
+    }catch(e){
+      // fallback
+      timeValue.textContent = now.toLocaleString();
+      tzValue.textContent = remoteTZ || tz;
+    }
+  }
+  // tick every 1s
+  setInterval(()=>updateClock(window._remoteTimezone || tz),1000);
+
+  // Fetch IP & geo data from ipapi.co
+  async function fetchIpData(){
+    setHTML('ipValue','<span class="spinner"></span> جلب...');
+    setText('countryValue','...');
+    setText('cityRegion','...');
+    setText('coords','...');
+    setText('ipOrg','...');
+    setText('rawJson','...');
+    try{
+      const res = await fetch('https://ipapi.co/json/', {cache:'no-store'});
+      if(!res.ok) throw new Error('response not ok');
+      const data = await res.json();
+      // fields: ip, city, region, country_name, country_code, latitude, longitude, timezone, org
+      ipValue.textContent = data.ip || '—';
+      ipOrg.textContent = data.org || (data.org ? data.org : 'مزود غير متوفر');
+      countryValue.textContent = data.country_name ? (data.country_name + (data.country_code ? ' ('+data.country_code+')' : '')) : '—';
+      cityRegion.textContent = [data.city, data.region].filter(Boolean).join(' — ') || '—';
+      coords.textContent = (data.latitude && data.longitude) ? `إحداثيات: ${data.latitude}, ${data.longitude}` : '—';
+      rawJson.textContent = JSON.stringify(data, null, 2);
+      // set timezone for clock
+      if(data.timezone){
+        window._remoteTimezone = data.timezone;
+        updateClock(data.timezone);
+      } else {
+        updateClock();
+      }
+      // show location flag like emoji (best-effort)
+      try{
+        const cc = data.country_code || '';
+        if(cc){
+          // convert country code to regional indicator symbols
+          const flag = cc.toUpperCase().replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0)));
+          countryValue.textContent += ' ' + flag;
+        }
+      }catch(e){}
+      // Show network status detail
+      setNetStatus(onlineState());
+      connText.textContent = onlineState() ? 'متصل' : 'غير متصل';
+      // quick ping to show latency
+      await quickPing();
+    }catch(err){
+      console.error(err);
+      ipValue.textContent = 'فشل جلب البيانات';
+      rawJson.textContent = 'فشل في الاتصال أو تم حجب الخدمة.';
+      setNetStatus(onlineState());
+      connText.textContent = onlineState() ? 'متصل (لكن الخدمة الخارجية غير متوفرة)' : 'غير متصل';
+      latencyText.textContent = '—';
+      updateClock();
+    }
+  }
+
+  // Show UA info
+  function fillUA(){
+    const ua = navigator.userAgent || '—';
+    const platform = navigator.platform || '—';
+    uaValue.textContent = ua;
+    engine.textContent = `المنصة: ${platform} — لغة المتصفح: ${navigator.language || '—'}`;
+  }
+  fillUA();
+
+  // initial fetch
+  await fetchIpData();
+
+  // refresh button
+  document.getElementById('refreshBtn').addEventListener('click', ()=>fetchIpData());
+
+  // accessibility: allow keyboard copy for cards
+  document.addEventListener('keydown', (e)=>{
+    if(e.ctrlKey && e.key==='c'){ // ctrl+c copy all
+      document.getElementById('copyAll').click();
+    }
+  });
+
+  // small UX: clicking on rawJson expands to new tab for easier copy
+  rawJson.addEventListener('dblclick', ()=>{
+    const w = window.open(); w.document.body.style.background='#0b1220';
+    const pre = w.document.createElement('pre');
+    pre.textContent = rawJson.textContent;
+    pre.style.color='white'; pre.style.padding='18px'; pre.style.whiteSpace='pre-wrap';
+    w.document.body.appendChild(pre);
+  });
+
+})();
+</script>
+</body>
+</html>
